@@ -10,13 +10,26 @@ public class UniteEnseignementBusiness {
     private static List<UniteEnseignement> unitesEnseignement;
 
     public UniteEnseignementBusiness() {
-        unitesEnseignement = new ArrayList<UniteEnseignement>();
-        // Initialisation avec quelques exemples
-        unitesEnseignement.add(new UniteEnseignement(1, "Informatique", "Mme Maroua Douiri", 6, 1));
-        unitesEnseignement.add(new UniteEnseignement(2, "Mathématiques", "Mme Ines ElMejid", 5, 1));
-        unitesEnseignement.add(new UniteEnseignement(3, "Physique", "Mme Sarra Abidi", 4, 2));
-        unitesEnseignement.add(new UniteEnseignement(4, "Infographie", "Mme Oumeima Ibnelfkih", 3, 1));
-        unitesEnseignement.add(new UniteEnseignement(5, "Chimie", "M. Mohamed Amine Chebbi", 4, 2));
+        // On remplit la liste une seule fois, sinon chaque requête la remet à zéro
+        if (unitesEnseignement == null) {
+            unitesEnseignement = new ArrayList<UniteEnseignement>();
+            // Initialisation avec quelques exemples
+            unitesEnseignement.add(new UniteEnseignement(1, "Informatique", "Mme Maroua Douiri", 6, 1));
+            unitesEnseignement.add(new UniteEnseignement(2, "Mathématiques", "Mme Ines ElMejid", 5, 1));
+            unitesEnseignement.add(new UniteEnseignement(3, "Physique", "Mme Sarra Abidi", 4, 2));
+            unitesEnseignement.add(new UniteEnseignement(4, "Infographie", "Mme Oumeima Ibnelfkih", 3, 1));
+            unitesEnseignement.add(new UniteEnseignement(5, "Chimie", "M. Mohamed Amine Chebbi", 4, 2));
+        }
+    }
+
+    // Calculer le total des crédits d'un semestre
+    public int getTotalCreditsBySemestre(int semestre) {
+        int total = 0;
+        for (UniteEnseignement ue : unitesEnseignement) {
+            if (ue.getSemestre() == semestre)
+                total = total + ue.getCredits();
+        }
+        return total;
     }
 
     public UniteEnseignement getUEByCode(int code) {
